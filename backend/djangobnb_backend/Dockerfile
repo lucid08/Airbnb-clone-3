@@ -1,5 +1,6 @@
-FROM python:3.13.0a4-slim
+FROM python:3.12.2-slim-bullseye
 
+RUN apt-get update && apt-get install -y libpq-dev gcc
 WORKDIR /usr/src/djangobnb_backend
 
 ENV PYTHONDONTWRITEBYTECODE 1
