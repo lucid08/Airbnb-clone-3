@@ -9,7 +9,6 @@ from useraccount.models import User
 
 class Property(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    landlord = models.ForeignKey(User, related_name='properties', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
     bedrooms = models.IntegerField()
@@ -20,6 +19,7 @@ class Property(models.Model):
     category = models.CharField(max_length=255)
     price_per_night = models.IntegerField()
     image = models.ImageField(upload_to='uploads/properties')
+    landlord = models.ForeignKey(User, related_name='properties', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def image_url(self):
