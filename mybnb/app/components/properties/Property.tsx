@@ -2,9 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import PropertyListItem from "./PropertyListItem";
+import apiService from "@/app/services/apiService";
 
 export type PropertyType = {
   id: string;
+  title: string;
+  image_url: string;
+  price_per_night: number;
 }
 
 const Property = () => {
@@ -24,6 +28,7 @@ const Property = () => {
   };
 
   useEffect(() => {
+    apiService.get('Helooo')
     getResponse();
   }, []);
 
@@ -32,7 +37,7 @@ const Property = () => {
       {properties.map((property) => {
         return (<PropertyListItem
           key={property.id}
-          // property={property}
+          property={property}
           />);
       })}
     </>
