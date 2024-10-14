@@ -9,37 +9,30 @@ export type PropertyType = {
   title: string;
   image_url: string;
   price_per_night: number;
-}
+};
 
 const Property = () => {
   const [properties, setProperties] = useState<PropertyType[]>([]);
 
   const getResponse = async () => {
-    const url = "http://localhost:8000/api/properties";
-    await fetch(url, {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log("json", json);
-        setProperties(json.data);
-      })
-      .catch((error) => console.error("Error:", error));
+    try {
+      const url = "/api/properties";
+      const tempProperties = await apiService.get(url);
+      setProperties(tempProperties.data); // Ensure tempProperties.data is valid
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+    }
   };
 
   useEffect(() => {
-    apiService.get('Helooo')
     getResponse();
   }, []);
 
   return (
     <>
-      {properties.map((property) => {
-        return (<PropertyListItem
-          key={property.id}
-          property={property}
-          />);
-      })}
+      {properties.map((property) => (
+        <PropertyListItem key={property.id} property={property} />
+      ))}
     </>
   );
 };
