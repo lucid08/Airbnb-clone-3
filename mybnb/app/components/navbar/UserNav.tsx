@@ -4,8 +4,13 @@ import { useState } from "react";
 import MenuLink from "./MenuLink";
 import useLoginModel from "@/app/hooks/useLoginModel";
 import useSignupModel from "@/app/hooks/useSignupModel";
+import Logout from "../Logout";
 
-const UserNav = () => {
+interface UserNavProps {
+  userId: string | null;
+}
+
+const UserNav: React.FC<UserNavProps> = ({ userId }) => {
   const loginModel = useLoginModel();
   const signupModel = useSignupModel();
   const [isOpen, setIsOpen] = useState(false);
@@ -42,22 +47,28 @@ const UserNav = () => {
       </button>
       {isOpen && (
         <div className="absolute w-[220px] top-[60px] right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer">
-          <MenuLink
-            label="log in"
-            onClick={() => {
-              console.log("Clicked to log in");
-              setIsOpen(false);
-              loginModel.open();
-            }}
-          />
-          <MenuLink
-            label="Sign up"
-            onClick={() => {
-              console.log("Clicked to log in");
-              setIsOpen(false);
-              signupModel.open();
-            }}
-          />
+          {userId ? (
+            <Logout />
+          ) : (
+            <>
+              <MenuLink
+                label="log in"
+                onClick={() => {
+                  console.log("Clicked to log in");
+                  setIsOpen(false);
+                  loginModel.open();
+                }}
+              />
+              <MenuLink
+                label="Sign up"
+                onClick={() => {
+                  console.log("Clicked to log in");
+                  setIsOpen(false);
+                  signupModel.open();
+                }}
+              />
+            </>
+          )}
         </div>
       )}
     </div>

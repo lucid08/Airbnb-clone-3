@@ -6,6 +6,7 @@ import Model from "./Model";
 import CustomButton from "../forms/CustomButton";
 import { useRouter } from "next/navigation";
 import apiService from "@/app/services/apiService";
+import { handleLogin } from "@/app/lib/actions";
 
 const SignupModel = () => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const SignupModel = () => {
     };
     const response = await apiService.post("/api/auth/register/", JSON.stringify(formData));
     if(response.access){
-      // handle login
+      handleLogin(response.user.pk,response.access, response.refresh)
       signupModel.close()
       router.push('/')
     }
