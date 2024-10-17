@@ -6,9 +6,7 @@ const AddPropertyModel = () => {
     <div>
         const addPropertyModel  = usePropery();
         return(
-          <>
-          
-          </>
+          <div></div>
         )
     </div>
   )
