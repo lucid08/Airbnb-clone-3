@@ -14,7 +14,7 @@ const Navbar = async () => {
             <Image src="/logo.png" alt="nothings" width={180} height={38} />
           </Link>
           <div className="flex space-x-6"><SearchFilter/></div>
-          <div className="flex items-center space-x-6"><AddPropertyButton/> <UserNav userId = {userId}/></div>
+          <div className="flex items-center space-x-6"><AddPropertyButton userId = {userId} /> <UserNav userId = {userId}/></div>
         </div>
       </div>
     </nav>

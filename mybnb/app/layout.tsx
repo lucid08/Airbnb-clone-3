@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/Navbar";
 import Model from "./components/models/Model";
 import LoginModel from "./components/models/LoginModel";
 import SignupModel from "./components/models/SignupModel";
+import AddPropertyModel2 from "./components/models/AddPropertyModel2";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,6 +38,7 @@ export default function RootLayout({
         <div className="pt-32">{children}</div>
         <LoginModel />
         <SignupModel/>
+        <AddPropertyModel2/>
       </body>
     </html>
   );
