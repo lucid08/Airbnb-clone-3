@@ -17,7 +17,7 @@ const Categories: React.FC<CategoriesProps> = ({
         <Image src="/treehouse.jpg" width={25} height={25} alt="Beach" />
         <span className="text-xs">Beach</span>
       </div>
-      <div onClick={() => setCategory('Villas')}  className={`pb-3 flex flex-col items-center space-y-2 border-b-2 ${dataCategory == 'Villas' ? 'border-gray-800' : 'border-white'} hover:border-gray-200 ${dataCategory == 'Villas' ? 'opacity-100' : 'opacity-60'} hover:opacity-100 `}>
+      <div onClick={() => setCategory('beach')}  className={`pb-3 flex flex-col items-center space-y-2 border-b-2 ${dataCategory == 'Villas' ? 'border-gray-800' : 'border-white'} hover:border-gray-200 ${dataCategory == 'Villas' ? 'opacity-100' : 'opacity-60'} hover:opacity-100 `}>
         <Image src="/treehouse.jpg" width={25} height={25} alt="beach" />
         <span className="text-xs">Villas</span>
       </div>
