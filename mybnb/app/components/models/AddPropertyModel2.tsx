@@ -7,6 +7,8 @@ import CustomButton from "../forms/CustomButton";
 import Categories from "../addCatogories/Categories";
 import SelectCountry, { SelectCountryValue } from "../forms/SelectCountry2";
 import Image from "next/image";
+import apiService from "@/app/services/apiService";
+import { useRouter } from "next/navigation";
 const AddPropertyModel2 = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [dataCategory, setDataCategory] = useState("");
@@ -22,6 +24,10 @@ const AddPropertyModel2 = () => {
 
 
   const addPropertymodel = usePropertyModel();
+  const router = useRouter();
+
+
+
 
   const setCategory = (category: string) => {
     setDataCategory(category);
@@ -33,6 +39,40 @@ const AddPropertyModel2 = () => {
       const tempFile = event.target.files[0]
       setDataImage(tempFile);
     }
+  }
+
+  const submitForm = async () => {
+    console.log('submitForm');
+    if(
+      dataCategory &&
+      dataTitle &&
+      dataDescription &&
+      dataPrice &&
+      dataCountry &&
+      dataImage 
+    ) {
+      const formData = new FormData();
+      formData.append('category', dataCategory)
+      formData.append('title', dataTitle);
+      formData.append('description', dataDescription)
+      formData.append('price_per_night', dataPrice)
+      formData.append('bedrooms', dataBedrooms);
+      formData.append('bathrooms', dataBathrooms)
+      formData.append('guests', dataGuests)
+      formData.append('country', dataCountry.label)
+      formData.append('country_code', dataCountry.value)
+      formData.append('image', dataImage)
+
+      const response = await apiService.post('/api/properties/create', formData)
+      if(response.success){
+        console.log('Success Mateeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+        
+        router.push('/')
+        addPropertymodel.close();
+      }
+
+    }
+    
   }
 
   const content = (
