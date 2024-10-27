@@ -20,7 +20,7 @@ const LoginModel = () => {
       email: email,
       password: password,
     };
-    const response = await apiService.post(
+    const response = await apiService.postWithOut(
       "/api/auth/login/",
       JSON.stringify(formData)
     );
