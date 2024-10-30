@@ -14,6 +14,7 @@ const AddPropertyModel2 = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [dataCategory, setDataCategory] = useState("");
   const [dataTitle, setDataTitle] = useState("");
+  const [errors, setErrors] = useState<string[]>([]);
   const [dataDescription, setDataDescription] = useState("");
   const [dataPrice, setDataPrice] = useState("");
   const [dataBedrooms, setDataBedrooms] = useState("");
@@ -69,6 +70,10 @@ const AddPropertyModel2 = () => {
                 addPropertymodel.close();
             } else {
                 setErrorMessage("Error adding property. Please try again.");
+                const tempError: string[] = Object.values(response).map((error: any) => {
+                  return error;
+                })
+                setErrors(tempError)
             }
         } else {
             setErrorMessage("Please fill in all required fields.");
@@ -163,6 +168,13 @@ const AddPropertyModel2 = () => {
               />
             </div>
           </div>
+          {errors.map((error, index) => {
+            return(
+              <div key={index} className="p-5 mb-4 bg-airbnb text-white rounded-xl opacity-80">
+                {error}
+              </div>
+            )
+          })}
           <CustomButton label="Previous" className="mb-2 bg-black hover:bg-gray-800" onClick={() => setCurrentStep(2)} />
           <CustomButton label="Next" onClick={() => setCurrentStep(4)} />
         </>
