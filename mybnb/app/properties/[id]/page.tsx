@@ -6,6 +6,8 @@ import React from "react";
 const PropertyDetailPage = async ({params} : {params : {id : string}}) => {
 
   const property = await apiService.get(`/api/properties/${params.id}`)
+  console.log(property.landlord.name);
+  
 
   return (
     <div className="max-w-[1500] mx-auto px-6 pb-6">
@@ -46,7 +48,9 @@ const PropertyDetailPage = async ({params} : {params : {id : string}}) => {
         {property.description}
         </p>
         </div>
-      <ReservationSidebar/>
+      <ReservationSidebar
+      property={property}
+      />
       </div>
     </div>
   );
