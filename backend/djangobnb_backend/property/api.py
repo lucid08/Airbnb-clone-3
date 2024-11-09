@@ -60,4 +60,4 @@ def book_property(request, pk):
         )
     except Exception as e:
         print("Error", e)
-        return JsonResponse({'success': False})
+        return JsonResponse({'success': Fals})
