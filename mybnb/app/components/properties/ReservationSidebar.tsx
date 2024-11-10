@@ -1,14 +1,37 @@
+'use client';
+
+import useLoginModel from "@/app/hooks/useLoginModel";
+import { useState } from "react";
+
+import {Range} from 'react-date-range';
+
+const initialDateRange = {
+    startDate: new Date(),
+    endDate: new Date(),
+    key: 'selection'
+}
 export type Property = {
     id: string;
     price_per_night: number;
 }
 
 interface ReservationSidebarProps {
+    userId: string | null;
     property:Property
 }
 const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
-    property
+    property,
+    userId
 }) => {
+
+    const loginModal = useLoginModel();
+    const [fee, setFee] = useState<number>(0);
+    const [nights, setNights] = useState<number>(1);
+    const [totalPrice, setTotalPrice] = useState<number>(0);
+    const [dateRange, setDateRange] = useState<Range>(initialDateRange);
+    const [minDate, setMinDate] = useState<Date>(new Date())
+    const [guests, setGuests] = useState<string>('1');
+
   return (
     <div className='mt-6 p-6 col-span-2 rounded-xl border border-gray-300 shadow-xl'>
         <h2 className='mb-5 text-2xl'>{property.price_per_night} rupees per night</h2>
