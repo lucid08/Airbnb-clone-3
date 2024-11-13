@@ -8,7 +8,7 @@ import 'react-date-range/dist/theme.default.css';
 
 interface DatePickerProps {
     value: Range,
-    onChange: (range: Range) => voi
+    onChange: (range: Range) => void
 }
 
 const Calender = () => {
