@@ -8,12 +8,19 @@ import 'react-date-range/dist/theme.default.css';
 
 interface DatePickerProps {
     value: Range,
-    onChange: (range: Range) => voi
+    onChange: (range: RangeKeyDict) => void;
+    bookedDates?: Date[];
+
 }
 
-const Calender = () => {
+const Calender: React.FC<DatePickerProps> = ({
+  value,
+  onChange,
+  bookedDates
+}) => {
   return (
-    <div>Calender</div>
+    <DateRange 
+    className='w-full border border-gray-400 rounded-xl mb-4'
   )
 }
 
