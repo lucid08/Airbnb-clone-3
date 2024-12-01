@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import {Range} from 'react-date-range';
 import { differenceInDays, eachDayOfInterval } from "date-fns";
+import Calender from "../forms/Calender";
 
 const initialDateRange = {
     startDate: new Date(),
@@ -35,6 +36,19 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
     const [guests, setGuests] = useState<string>('1');
     const guestRange = Array.from( {length: property.guests }, (_, index) => index + 1);
 
+    const _setDateRange = (selection : any) => {
+        const newStartDate = new Date(selection.newStartDate)
+        const newEndDate = new Date(selection.newEndDate)
+        if(newEndDate <= newStartDate){
+            newEndDate.setDate(newStartDate.getDate() + 1)
+        }
+        setDateRange({
+            ...dateRange,
+            startDate: newStartDate,
+            endDate: newEndDate,
+        })
+    }
+
     useEffect(() => {
         if(dateRange.startDate && dateRange.endDate){
             const totalDays = differenceInDays(dateRange.endDate, dateRange.startDate);
@@ -55,7 +69,11 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
   return (
     <div className='mt-6 p-6 col-span-2 rounded-xl border border-gray-300 shadow-xl'>
         <h2 className='mb-5 text-2xl'>{property.price_per_night} rupees per night</h2>
-        <div className='mb-6 p-3 border border-gray-400 rounded-xl'>
+        <Calender
+        value={dateRange}
+        onChange={(value) => _setDateRange(value.selection)}
+        />
+        <div className='mb-6 p-3 border border-gray-400 rounded-xl'> 
              <label className='mb-2 block font-bold text-xs'>Guests</label>
              <select 
              value={guests}
